@@ -31,13 +31,30 @@ public class Anagram {
 		// Replace the following statement with your code
 		return false;
 	}
-	   
+	
+	public static boolean isUpper(char ch){
+		return ch >= 'A' && ch <= 'Z';
+	}
+
+	public static boolean isDash(char ch){
+		if (ch = " ") {
+			return true;
+		}
+		return false;
+	}
+
 	// Returns a preprocessed version of the given string: all the letter characters are converted
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
 		// Replace the following statement with your code
-		return "";
+		for (int i = 0; i < str.length(); i++) {
+			char curChar = str.charAt(i);
+			if (isUpper(curChar) == true) {
+				str.charAt(i).toUpperCase(curChar);
+			}
+		}
+		return str;
 	} 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
