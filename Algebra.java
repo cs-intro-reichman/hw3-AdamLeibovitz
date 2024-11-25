@@ -62,7 +62,7 @@ public class Algebra {
 			}
 		}
 		else if (x2 < 0) {
-			for (int i = 0; i < x2; i++) {
+			for (int i = 0; i > x2; i--) {
 				ans = minus(ans,x1);
 			}
 		}
@@ -72,15 +72,13 @@ public class Algebra {
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
 		int ans = 1;
-		if (n > 0) {
+		if (n >= 0) {
 			for (int i = 0; i < n; i++) {
 				ans = times(ans,x);
 			}
 		}
 		else {
-			for (int i = 0; i > n; i--) {
-				ans = div(ans,x);
-			}
+			return 0; // the int of a negative base will always round down to 0
 		}
 		return ans;
 	}
