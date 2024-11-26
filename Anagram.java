@@ -33,9 +33,6 @@ public class Anagram {
 		String newStr1 = preProcess(str1);
 		String newStr2 = preProcess(str2);
 		String abc = "abcdefghijklmnopqrstuvwxyz";
-		if (newStr1.length() != newStr2.length()) {
-			return false;
-		}
 		for (int i = 0; i < abc.length(); i++) {
 			int count1 = 0;
 			int count2 = 0;
@@ -43,6 +40,8 @@ public class Anagram {
 				if (newStr1.charAt(j) == abc.charAt(i)) {
 					count1++;
 				}
+			}
+			for (int j = 0; j < newStr2.length(); j++) {
 				if (newStr2.charAt(j) == abc.charAt(i)) {
 					count2++;
 				}
@@ -55,6 +54,9 @@ public class Anagram {
 	}
 
 	public static boolean isLower(char ch){
+		if (ch == ' ') {
+			return true;
+		}
 		return ch >= 'a' && ch <= 'z';
 	}
 
