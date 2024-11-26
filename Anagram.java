@@ -1,4 +1,6 @@
 /** Functions for checking if a given string is an anagram. */
+import java.util.Random;
+
 public class Anagram {
 	public static void main(String args[]) {
 		// Tests the isAnagram function.
@@ -28,19 +30,32 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
-	}
-	
-	public static boolean isUpper(char ch){
-		return ch >= 'A' && ch <= 'Z';
+		String newStr1 = preProcess(str1);
+		String newStr2 = preProcess(str2);
+		String abc = "abcdefghijklmnopqrstuvwxyz";
+		if (newStr1.length() != newStr2.length()) {
+			return false;
+		}
+		for (int i = 0; i < abc.length(); i++) {
+			int count1 = 0;
+			int count2 = 0;
+			for (int j = 0; j < newStr1.length(); j++) {
+				if (newStr1.charAt(j) == abc.charAt(i)) {
+					count1++;
+				}
+				if (newStr2.charAt(j) == abc.charAt(i)) {
+					count2++;
+				}
+			}
+			if (count1 != count2) {
+				return false;
+			}
+		}
+		return true;
 	}
 
-	public static boolean isDash(char ch){
-		if (ch = " ") {
-			return true;
-		}
-		return false;
+	public static boolean isLower(char ch){
+		return ch >= 'a' && ch <= 'z';
 	}
 
 	// Returns a preprocessed version of the given string: all the letter characters are converted
@@ -48,19 +63,36 @@ public class Anagram {
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
 		// Replace the following statement with your code
-		for (int i = 0; i < str.length(); i++) {
-			char curChar = str.charAt(i);
-			if (isUpper(curChar) == true) {
-				str.charAt(i).toUpperCase(curChar);
+		String tempStr = str.toLowerCase();
+		String newStr = "";
+		for (int i = 0; i < tempStr.length(); i++) {
+			if (isLower(tempStr.charAt(i))) {
+				newStr += tempStr.charAt(i);
 			}
 		}
-		return str;
+		return newStr;
 	} 
-	   
+
+	public static String removeChar(int index,String str){
+		String newStr = "";
+		for (int i = 0; i < str.length(); i++) {
+			if (i != index) {
+				newStr += str.charAt(i);
+			}
+		}
+		return newStr;
+	}
+
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		Random rand = new Random();
+		String randAnagram = "";
+		while (str != "") {
+			int num1 = rand.nextInt(str.length());
+			randAnagram += str.charAt(num1);
+			str = removeChar(num1,str);	
+		}
+		return randAnagram;
 	}
 }
